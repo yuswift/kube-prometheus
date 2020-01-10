@@ -6,6 +6,13 @@ metadata:
   name: k8s
   namespace: monitoring
 spec:
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: cephrbd
+        resources:
+          requests:
+            storage: 200Gi
   alerting:
     alertmanagers:
     - name: alertmanager-main
@@ -16,6 +23,7 @@ spec:
     kubernetes.io/os: linux
   podMonitorNamespaceSelector: {}
   podMonitorSelector: {}
+  retention: 31d
   replicas: 2
   resources:
     requests:
